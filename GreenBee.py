@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from fpdf import FPDF
 import fpdf
-
+import base64
 # import firebase_admin
 # from firebase_admin import credentials
 # from firebase_admin import db
@@ -439,5 +439,10 @@ pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}")
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
-    output_pdf = pdf.output('load.pdf')
-    st.download_button("Generate PDF", data=output_pdf, file_name='load_details.pdf')
+    export_as_pdf = st.button("Export Report")
+    def create_download_link(val, filename):
+        b64 = base64.b64encode(val)  # val looks like b'...'
+        return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="{filename}.pdf">Download file</a>'
+    if export_as_pdf:
+        html = create_download_link(pdf.output(dest="S").encode("latin-1"), "load_details")
+        st.markdown(html, unsafe_allow_html=True)
