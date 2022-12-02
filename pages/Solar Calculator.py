@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd
-from firebase_admin import db
+# from firebase_admin import db
 
-watthrsum = 0
+# ref = db.reference("/Load Details/")
 totalwattsum = 0
-ref = db.reference("/Load Details/")
-
-totalwattsum = ref.order_by_child("totalwttsum".get())
-watthrsum = ref.order_by_child("watthrsum".get())
+watthrsum = 0
+# totalwattsum = ref.order_by_child("totalwttsum".get())
+# watthrsum = ref.order_by_child("watthrsum".get())
 st.title("SOLAR PANEL CALCULATOR")
 st.subheader("Solar Panel Details")
 solar_sys_volt = st.number_input(label='Solar System Voltage (Volts DC)',

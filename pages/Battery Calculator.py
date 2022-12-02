@@ -1,12 +1,11 @@
 import streamlit as st
-from firebase_admin import db
+# from firebase_admin import db
 
-watthrsum = 0
+# ref = db.reference("/Load Details/")
 totalwattsum = 0
-ref = db.reference("/Load Details/")
-
-totalwattsum = ref.order_by_child("totalwttsum".get())
-watthrsum = ref.order_by_child("watthrsum".get())
+watthrsum = 0
+# totalwattsum = ref.order_by_child("totalwttsum".get())
+# watthrsum = ref.order_by_child("watthrsum".get())
 st.title('BATTERY BANK CALCULATOR')
 st.subheader("Battery Bank Load Details")
 
@@ -66,11 +65,11 @@ st.write(f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day')
 total_amphr = watthrsum / bttry_bank_volt
 st.write(f'Total Amp.Hr : {total_amphr} Amp.Hr')
 
-avg_load = (total_amphr(1+(loss/100)))/(bttry_eff/100)
+avg_load = (total_amphr * (1 + (loss / 100))) / (bttry_eff / 100)
 st.write(f'Average Load : {avg_load} Amp.Hr')
 
 storage_req = avg_load * rsrv_day
 st.write(f'Storage Required : {storage_req} Amp.Hr')
 
-battery_aging = (storage_req)(1+(bttry_aging/100))
+battery_aging = (storage_req) * (1+(bttry_aging/100))
 st.write(f'Battery aging : {battery_aging} Amp.Hr')

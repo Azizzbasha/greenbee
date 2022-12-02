@@ -2,20 +2,20 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import db
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import db
 
-cred_obj = credentials.Certificate("greenbee-servicekey.json")
-databaseURL = 'https://greenbee-project-default-rtdb.firebaseio.com/'
+# cred_obj = credentials.Certificate("greenbee-servicekey.json")
+# databaseURL = 'https://greenbee-project-default-rtdb.firebaseio.com/'
 
-try:
-    default_app = firebase_admin.initialize_app(cred_obj, {
-	'databaseURL':databaseURL
-	})
-except:
-    pass
-ref = db.reference("/")
+# try:
+#     default_app = firebase_admin.initialize_app(cred_obj, {
+# 	'databaseURL':databaseURL
+# 	})
+# except:
+#     pass
+# ref = db.reference("/")
 
 st.title('GreenBee Innovation')
 
@@ -70,15 +70,15 @@ if st.button('Add'):
 
 totalwattsum = df['Total Watt'].sum()
 watthrsum = df['Watt Hr/Day'].sum()
-json_obj = {
-    'Load Details':
-        {
-            'totalwattsum': totalwattsum,
-            'watthrsum': watthrsum
-        }
-    }
+# json_obj = {
+#     'Load Details':
+#         {
+#             'totalwattsum': totalwattsum,
+#             'watthrsum': watthrsum
+#         }
+#     }
 
-ref.set(json_obj)
+# ref.set(json_obj)
 
 st.subheader('Result')
 st.write(f"Total Watt: {totalwattsum}")
@@ -90,15 +90,15 @@ row_to_delete = st.text_input(
 if st.button(label='Delete row'):
     totalwattsum -= df['Total Watt'][int(row_to_delete)]
     watthrsum -= df['Watt Hr/Day'][int(row_to_delete)]
-    json_obj = {
-    'Load Details':
-        {
-            'totalwattsum': totalwattsum,
-            'watthrsum': watthrsum
-        }
-    }
+    # json_obj = {
+    # 'Load Details':
+    #     {
+    #         'totalwattsum': totalwattsum,
+    #         'watthrsum': watthrsum
+    #     }
+    # }
 
-    ref.set(json_obj)
+    # ref.set(json_obj)
     df['Equipment Name'][int(row_to_delete)] = ""
     df['No'][int(row_to_delete)] = 0
     df['Watt'][int(row_to_delete)] = 0
@@ -131,3 +131,4 @@ if st.button('Generate Graph'):
     plt.fill_between(np.arange(12), watthrdaygraph, color="skyblue",
                      alpha=0.5, label='Watt Hr/Day')
     st.pyplot(plt.show())
+
