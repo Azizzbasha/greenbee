@@ -135,15 +135,15 @@ st.dataframe(df)
 if st.button('Generate Graph'):
     st.area_chart(df, x='Total Watt', y='Watt Hr/Day')
 
-    st.set_option('deprecation.showPyplotGlobalUse', False)
-    totalwattgraph = [i for i in df['Total Watt']]
-    watthrdaygraph = [i for i in df['Watt Hr/Day']]
+    # st.set_option('deprecation.showPyplotGlobalUse', False)
+    # totalwattgraph = [i for i in df['Total Watt']]
+    # watthrdaygraph = [i for i in df['Watt Hr/Day']]
 
-    plt.fill_between(np.arange(12), totalwattgraph, color="lightpink",
-                     alpha=0.5, label='Total Watt')
-    plt.fill_between(np.arange(12), watthrdaygraph, color="skyblue",
-                     alpha=0.5, label='Watt Hr/Day')
-    st.pyplot(plt.show())
+    # plt.fill_between(np.arange(12), totalwattgraph, color="lightpink",
+    #                  alpha=0.5, label='Total Watt')
+    # plt.fill_between(np.arange(12), watthrdaygraph, color="skyblue",
+    #                  alpha=0.5, label='Watt Hr/Day')
+    # st.pyplot(plt.show())
 
 # from firebase_admin import db
 
