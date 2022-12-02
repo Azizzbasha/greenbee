@@ -2,20 +2,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
-
-
-page_bg_img = '''
-<style>
-body {
-background-image: url("profile1.jpeg");
-background-size: cover;
-}
-</style>
-'''
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
-with st.sidebar:
-    st.image(image='profile2.jpeg')
+from fpdf import FPDF
+import fpdf
 
 # import firebase_admin
 # from firebase_admin import credentials
@@ -218,24 +206,28 @@ st.write(
     '''
     ###### Selection of Solar Panel Connection criteria: 
     ''')
-
+ok = True
 if(solarpanel_conn == 'Series'):
     x = 1
     if(sizeofpanelwatt >= solar_arr_size):
         st.write('OK')
         y = 1
+        ok = True
     else:
         st.write('Select Other Type of Connection')
         y = 0
+        ok = False
 
 elif(solarpanel_conn == 'Parallel'):
     x = 2
     if(sizeofpanelwatt >= solar_sys_volt):
         st.write('OK')
         y = 1
+        ok = True
     else:
         st.write('Select Other Type of Connection')
         y = 0
+        ok = False
 
 elif(solarpanel_conn == 'Series-Parallel'):
     x = 3
@@ -243,27 +235,32 @@ elif(solarpanel_conn == 'Series-Parallel'):
         if(sizeofpanelwatt < solar_sys_volt):
             st.write('OK')
             y = 1
+            ok = True
         else:
             st.write('Select Other Type of Connection')
             y = 0
+            ok = False
     else:
         st.write('Select Other Type of Connection')
         y = 0
+        ok = False
 else:
     st.write('')
 
-
+ok_eff = True
 if((solar_sys_volt % sizeofpanelvolt) == 0):
     st.write(
         '''
         ###### Selection of each solar panel efficiency: 
         OK
         ''')
+    ok_eff = True
 else:
     st.write(
         f'''
         ###### Selection of each solar panel efficiency: 
         Select other solar voltage instead of {sizeofpanelvolt} volts''')
+    ok_eff = False
 
 
 amphr = round(((solar_arr_size)/(sizeofpanelwatt)), 1)
@@ -389,3 +386,58 @@ st.write(f'Storage Required : {storage_req} Amp.Hr')
 
 battery_aging = (storage_req) * (1+(bttry_aging/100))
 st.write(f'Battery aging : {battery_aging} Amp.Hr')
+
+pdf = FPDF()
+ 
+pdf.add_page()
+
+pdf.image(name='profile2.jpeg', w=150, h=100, x=30)
+pdf.ln(h=20)
+pdf.set_font("Times", "B",size = 30)
+ 
+
+pdf.cell(200, 10, txt = "GreenBee Innovation & Energy",
+         ln = 1, align = 'C')
+
+pdf.set_font("Arial",size = 20)
+
+pdf.cell(200, 10, txt = "Electrical Details Report",
+         ln = 2, align = 'C')
+pdf.set_font("Times", "B", size = 15)
+pdf.cell(200, 10, txt = "Output of Solar Panel", ln = 3, align = 'L')
+
+pdf.set_font("Arial", size = 13)
+pdf.cell(200, 10, txt = f"Size of Solar Panel: {sizeofpanelwatt} Watt, {sizeofpanelvolt} Volts", ln=4)
+
+pdf.cell(200, 10, txt = f"Type of connection for solar panel: {solarpanel_conn}", ln = 5)
+
+if ok == True:
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: OK", ln=6)
+else:
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: Select other type of connection", ln=6)
+
+if ok_eff == True:
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: OK", ln=7)
+else:
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: Select other solar voltage instead of {sizeofpanelvolt} volts", ln=7)
+
+pdf.cell(200, 10, txt = f"Number of string for solar panel: {z}", ln=8)
+
+if y == 1:
+    pdf.cell(200, 10, txt = f"Total watt of each solar panel string: {sizeofpanelwatt} watt, {(sizeofpanelwatt)/(sizeofpanelvolt)} amp", ln=9)
+else:
+    pdf.cell(200, 10, txt="", ln=9)
+
+if((solar_sys_volt % sizeofpanelvolt) == 0):
+    pdf.cell(200, 10, txt = f"Total No. of Solar Panel in each string: {solarpanelineachstring}", ln=10)
+else:
+    pdf.cell(200, 10, txt = "", ln=10)
+    
+pdf.cell(200, 10, txt = f"Total Watts of Solar Panel: {t} watts, {round(t/sizeofpanelvolt, 2)} amps", ln=11)
+
+pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}")
+
+with st.sidebar:
+    st.image(image='profile2.jpeg')
+    if st.button('Generate PDF'):
+        pdf.output('load.pdf')
