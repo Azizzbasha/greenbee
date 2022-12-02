@@ -634,7 +634,7 @@ pdf.cell(200, 10, txt = f'Depth of discharge : {depth_of_discharge} Amp.Hr', ln 
 
 
 pdf.set_font("Times", "B", size = 15)
-pdf.cell(200, 10, txt = f"Size of INvertor/Charge Calculator", ln=29)
+pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=29)
 
 pdf.set_font("Arial", size = 13)
 pdf.cell(200, 10, txt= f"Size of invertor: {(watthrsum)+((watthrsum)*(additional_load/invertor_eff))}", ln=30)
