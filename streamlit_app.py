@@ -8,12 +8,6 @@ from firebase_admin import db
 
 cred_obj = credentials.Certificate("greenbee-servicekey.json")
 databaseURL = 'https://greenbee-project-default-rtdb.firebaseio.com/'
-j = 0
-if (j==0):
-    default_app = firebase_admin.initialize_app(cred_obj, {
-        'databaseURL': databaseURL
-    })
-    j += 1
 
 ref = db.reference("/")
 
