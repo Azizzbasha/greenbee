@@ -346,7 +346,61 @@ with st.form('temp'):
         )
     st.form_submit_button('Submit')
 
-# THE BATTERY BANK REQUIRED
+
+# Finding rating
+x=temperature
+rating = 0
+if(temp_unit=='C'):
+    if((x>=1.1)and (x<4)):
+        rating = 1.4
+    elif((x>=4)and (x<6.7)):
+        rating = 1.3
+    elif((x>=6.7)and (x<10)):
+        rating = 1.59
+    elif((x>=10)and (x<15.6)):
+        rating = 1.19
+    elif((x>=15.6)and (x<21.2)):
+        rating = 1.11
+    elif((x>=21.2)and (x<26.7)):
+        rating = 1.04
+    elif(x>=26.7):
+        rating = 1
+    else:
+        rating =0
+
+elif(temp_unit=='F'):
+    if((x>=20)and (x<30)):
+        rating = 1.4
+    elif((x>=30)and (x<40)):
+        rating = 1.3
+    elif((x>=40)and (x<50)):
+        rating = 1.59
+    elif((x>=50)and (x<60)):
+        rating = 1.19
+    elif((x>=60)and (x<70)):
+        rating = 1.11
+    elif((x>=70)and (x<80)):
+        rating = 1.04
+    elif(x>=80):
+        rating = 1
+    else:
+        rating =0
+else:
+    rating = 0
+
+
+# Calculations
+total_amphr = watthrsum / bttry_bank_volt
+avg_load = (total_amphr * (1 + (loss / 100))) / (bttry_eff / 100)
+storage_req = avg_load * rsrv_day
+battery_aging = (storage_req) * (1+(bttry_aging/100))
+including_operating_temp = ((battery_aging) * (rating))
+depth_of_discharge = ((including_operating_temp)/(dod/100))
+
+
+battery_bank_req = (depth_of_discharge)
+st.write(f'The battery bank required : {battery_bank_req} Amp.Hr')
+
 
 st.write('''
     ###### Each Battery Rating
@@ -367,26 +421,121 @@ battery_conn = st.selectbox(
 )
 
 
+b=0
+if(battery_conn=='Series'):
+    a=1
+    if(battery_bank_req<= bttry_rating_amphr):
+        b=1
+    else:
+        b=0
+elif(battery_conn=='Parallel'):
+    a=2
+    if(bttry_rating_volts != bttry_bank_volt):
+        b=1
+    else:
+        b=0
+elif(battery_conn == 'Series-Parallel'):
+    a=3
+    if((battery_bank_req > bttry_rating_amphr)and(bttry_rating_volts < bttry_bank_volt)):
+        b=1
+    else:
+        b=0
+
+else:
+    st.write('')
+
+
 st.subheader('Battery Bank Output')
-st.write(f'Type of connection for Batteries: {battery_conn}')
+
+st.write (f'Type of connection for Batteries: {battery_conn}')
+
+if(b==0):
+    st.write ('OK')
+elif(b==1):
+    st.write('Select other type of connection')
+else:
+    st.write('')
+
+if((bttry_bank_volt)%(bttry_rating_volts)==0):
+    st.write('Selection of Each Battery Voltage: OK')
+else:
+    st.write(f'Selection of Each Battery Voltage: Select other type of voltage instead of {bttry_rating_volts} volts')
+
+# amp hour
+amphr = round((battery_bank_req/bttry_rating_amphr)+0.1,0)
+
+
+st.write('Number of String for Battries')
+if(a==1):
+    string = 1
+    st.write(f'{string}')
+elif(a==2):
+    string = amphr
+    st.write(f'{string}')
+elif(a==3):
+    string = amphr
+    st.write(f'{string}')
+else:
+    st.write('')
+
+if(b==1):
+    st.write(f'Total Amp.Hr of Each String {bttry_rating_amphr}')
+else:
+    st.write('')
+
+if((bttry_bank_volt)%(bttry_rating_volts)==0):
+    no_of_bttry = (bttry_bank_volt)/(bttry_rating_volts)
+    st.write(f'Total No of Battery in Each String: {no_of_bttry}')
+else:
+    st.write('')
+
+st.subheader('Total Battery Bank Amp.Hr')
+if(a==1):
+    st.write(f'{bttry_rating_amphr}')
+elif(a==2):
+    st.write(f'{bttry_rating_amphr * amphr}')
+elif(a==3):
+    st.write(f'{bttry_rating_amphr * amphr}')
+else:
+    st.write('')
+
+
+st.subheader('Total Nos of Batteries in Battery Bank ')
+if(a==1):
+    st.write(f'{no_of_bttry * string}')
+elif(a==2):
+    st.write(f'{no_of_bttry * string}')
+elif(a==3):
+    st.write(f'{no_of_bttry * string}')
+else:
+    st.write('')
+
 
 
 st.subheader('Battery Calculations')
-
 st.write(f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day')
-
-total_amphr = watthrsum / bttry_bank_volt
 st.write(f'Total Amp.Hr : {total_amphr} Amp.Hr')
-
-avg_load = (total_amphr * (1 + (loss / 100))) / (bttry_eff / 100)
 st.write(f'Average Load : {avg_load} Amp.Hr')
-
-storage_req = avg_load * rsrv_day
 st.write(f'Storage Required : {storage_req} Amp.Hr')
-
-battery_aging = (storage_req) * (1+(bttry_aging/100))
 st.write(f'Battery aging : {battery_aging} Amp.Hr')
+st.write(f'Including Operating Temperature : {including_operating_temp} Amp.Hr')
+st.write(f'Depth of discharge : {depth_of_discharge} Amp.Hr')
 
+
+# Inverter
+
+st.title('Size of Invertor/Charge controller')
+
+invertor_eff = st.number_input(label='Effeciency of Invertor (%): ', value=80)
+additional_load = st.number_input(label='Additional future load expansion (%): ', value=10)
+
+st.subheader('Size of invertor: ')
+st.write(f'{(watthrsum)+((watthrsum)(additional_load/invertor_eff))}')
+
+st.subheader('Solar Controller: ')
+st.write(f'{(t/sizeofpanelvolt)+7} AMP')
+
+# PDF Generation
 pdf = FPDF()
  
 pdf.add_page()
@@ -435,7 +584,61 @@ else:
     
 pdf.cell(200, 10, txt = f"Total Watts of Solar Panel: {t} watts, {round(t/sizeofpanelvolt, 2)} amps", ln=11)
 
-pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}")
+pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}", ln = 12)
+
+pdf.set_font("Times", "B", size = 15)
+pdf.cell(200, 10, txt = "Battery Bank Output", ln = 13, align = 'L')
+
+pdf.set_font("Arial", size = 13)
+
+if b == 0:
+    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} OK", ln = 14)
+elif b == 1:
+    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} Select other type of connection", ln = 14)
+
+if((bttry_bank_volt)%(bttry_rating_volts)==0):
+    pdf.cell(200, 10, txt = f"Selection of each battery voltage: OK", ln=15)
+else:
+    pdf.cell(200, 10, txt = f"Selection of Each Battery Voltage: Select other type of voltage instead of {bttry_rating_volts} volts", ln=15)
+
+pdf.cell(200, 10, txt = f"Number of string for batteries: {string}", ln=16)
+
+if b == 1:
+    pdf.cell(200, 10, txt = f"Total Amp.Hr of Each String {bttry_rating_amphr}", ln = 17)
+
+if((bttry_bank_volt)%(bttry_rating_volts)==0):
+    pdf.cell(200, 10, txt = f"Total No of Battery in Each String: {no_of_bttry}", ln=18)
+
+if a == 1:
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr}", ln=19)
+elif a == 2:
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=19)
+elif a == 3:
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=19)
+
+pdf.cell(200, 10, txt = f"Total Nos of battey in Battery Bank: {no_of_bttry * string}", ln=20)
+
+
+pdf.set_font("Times", "B", size = 15)
+pdf.cell(200, 10, txt = f"Battery Calculations", ln=21)
+
+pdf.set_font("Arial", size = 13)
+
+pdf.cell(200, 10, txt = f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day', ln = 22)
+pdf.cell(200, 10, txt = f'Total Amp.Hr : {total_amphr} Amp.Hr', ln = 23)
+pdf.cell(200, 10, txt = f'Average Load : {avg_load} Amp.Hr', ln = 24)
+pdf.cell(200, 10, txt = f'Storage Required : {storage_req} Amp.Hr', ln = 25)
+pdf.cell(200, 10, txt = f'Battery aging : {battery_aging} Amp.Hr', ln = 26)
+pdf.cell(200, 10, txt = f'Including Operating Temperature : {including_operating_temp} Amp.Hr', ln = 27)
+pdf.cell(200, 10, txt = f'Depth of discharge : {depth_of_discharge} Amp.Hr', ln = 28)
+
+
+pdf.set_font("Times", "B", size = 15)
+pdf.cell(200, 10, txt = f"Size of INvertor/Charge Calculator", ln=29)
+
+pdf.set_font("Arial", size = 13)
+pdf.cell(200, 10, txt= f"Size of invertor: {(watthrsum)+((watthrsum)(additional_load/invertor_eff))}", ln=30)
+pdf.cell(200, 10, txt = f"Solar Controller: {(t/sizeofpanelvolt)+7} AMP", ln =31)
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
