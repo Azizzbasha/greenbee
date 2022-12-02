@@ -2,11 +2,15 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
+import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
 cred_obj = credentials.Certificate("greenbee-servicekey.json")
 databaseURL = 'https://greenbee-project-default-rtdb.firebaseio.com/'
+default_app = firebase_admin.initialize_app(cred_obj, {
+    'databaseURL': databaseURL
+})
 ref = db.reference("/")
 
 st.title('GreenBee Innovation')
