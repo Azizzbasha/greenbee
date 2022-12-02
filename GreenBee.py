@@ -2,6 +2,21 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
+
+
+page_bg_img = '''
+<style>
+body {
+background-image: url("profile1.jpeg");
+background-size: cover;
+}
+</style>
+'''
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+with st.sidebar:
+    st.image(image='profile2.jpeg')
+
 # import firebase_admin
 # from firebase_admin import credentials
 # from firebase_admin import db
@@ -23,8 +38,6 @@ st.title('GreenBee Innovation')
 if 'key' not in st.session_state:
     st.session_state['key'] = 0
 
-
-# Randomly fill a dataframe and cache it
 
 
 @st.cache(allow_output_mutation=True)
