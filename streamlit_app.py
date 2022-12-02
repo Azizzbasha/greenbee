@@ -9,6 +9,12 @@ from firebase_admin import db
 cred_obj = credentials.Certificate("greenbee-servicekey.json")
 databaseURL = 'https://greenbee-project-default-rtdb.firebaseio.com/'
 
+try:
+    default_app = firebase_admin.initialize_app(cred_obj, {
+	'databaseURL':databaseURL
+	})
+except:
+    pass
 ref = db.reference("/")
 
 st.title('GreenBee Innovation')
@@ -24,8 +30,7 @@ if 'key' not in st.session_state:
 @st.cache(allow_output_mutation=True)
 def get_dataframe():
     return pd.DataFrame(
-        # np.random.randn(50, 6),
-        [("", 0, 0, 0, 0, 0)] * 12,
+        [("", 0, 0, 0, 0, 0)] * 50,
         columns=('Equipment Name', 'No', 'Watt', 'Using Hr', 'Total Watt', 'Watt Hr/Day'))
 
 
@@ -126,5 +131,3 @@ if st.button('Generate Graph'):
     plt.fill_between(np.arange(12), watthrdaygraph, color="skyblue",
                      alpha=0.5, label='Watt Hr/Day')
     st.pyplot(plt.show())
-
-
