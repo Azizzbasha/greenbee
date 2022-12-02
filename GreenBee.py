@@ -439,4 +439,5 @@ pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}")
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
-    st.download_button("Generate PDF", data=pdf.output('load.pdf'))
+    output_pdf = pdf.output('load.pdf')
+    st.download_button("Generate PDF", data=output_pdf, file_name='load_details.pdf')
