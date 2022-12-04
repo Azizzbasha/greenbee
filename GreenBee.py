@@ -533,7 +533,8 @@ st.subheader('Size of invertor: ')
 st.write(f'{((totalwattsum)+(totalwattsum*(additional_load/100))) / (invertor_eff/100)}')
 
 st.subheader('Solar Controller: ')
-st.write(f'{(t/sizeofpanelvolt)+7} AMP')
+# st.write(f'{(t/sizeofpanelvolt)+7} AMP')
+st.write(f'{t/24} AMP')
 
 # PDF Generation
 pdf = FPDF()
@@ -638,7 +639,7 @@ pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=29)
 
 pdf.set_font("Arial", size = 13)
 pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=30)
-pdf.cell(200, 10, txt = f"Solar Controller: {(t/sizeofpanelvolt)+7} AMP", ln =31)
+pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =31)
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
