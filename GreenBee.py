@@ -530,7 +530,7 @@ invertor_eff = st.number_input(label='Effeciency of Invertor (%): ', value=80)
 additional_load = st.number_input(label='Additional future load expansion (%): ', value=10)
 
 st.subheader('Size of invertor: ')
-st.write(f'{(watthrsum)+((watthrsum)*(additional_load/invertor_eff))}')
+st.write(f'{((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}')
 
 st.subheader('Solar Controller: ')
 st.write(f'{(t/sizeofpanelvolt)+7} AMP')
@@ -637,7 +637,7 @@ pdf.set_font("Times", "B", size = 15)
 pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=29)
 
 pdf.set_font("Arial", size = 13)
-pdf.cell(200, 10, txt= f"Size of invertor: {(watthrsum)+((watthrsum)*(additional_load/invertor_eff))}", ln=30)
+pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=30)
 pdf.cell(200, 10, txt = f"Solar Controller: {(t/sizeofpanelvolt)+7} AMP", ln =31)
 
 with st.sidebar:
