@@ -325,7 +325,7 @@ st.subheader("Battery Bank Load Details")
 bttry_bank_volt = st.number_input(
     label='Battery Bank\'s Voltage: (Volts DC)', value=24)
 rsrv_day = st.number_input(
-    label='Reserve days (No. of days battery gives current)', value=15)
+    label='Reserve days (No. of days battery gives current)', value=2)
 loss = st.number_input(
     label='Loose connection / Wire loss factor (%)', value=20)
 bttry_eff = st.number_input(label='Battery Effeciency (%)', value=100)
@@ -530,7 +530,7 @@ invertor_eff = st.number_input(label='Effeciency of Invertor (%): ', value=80)
 additional_load = st.number_input(label='Additional future load expansion (%): ', value=10)
 
 st.subheader('Size of invertor: ')
-st.write(f'{((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}')
+st.write(f'{((totalwattsum)+(totalwattsum*(additional_load/100))) / (invertor_eff/100)}')
 
 st.subheader('Solar Controller: ')
 st.write(f'{(t/sizeofpanelvolt)+7} AMP')
