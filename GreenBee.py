@@ -329,7 +329,7 @@ rsrv_day = st.number_input(
 loss = st.number_input(
     label='Loose connection / Wire loss factor (%)', value=20)
 bttry_eff = st.number_input(label='Battery Effeciency (%)', value=100)
-bttry_aging = st.number_input(label='Battery Aging (%)', value=100)
+bttry_aging = st.number_input(label='Battery Aging (%)', value=20)
 dod = st.number_input(label='Depth of discharge (%)', value=50)
 
 with st.form('temp'):
