@@ -556,97 +556,97 @@ pdf.set_font("Arial",size = 20)
 
 pdf.cell(200, 10, txt = 
 f'''
-Electrical Details Report 
-CustomerID: {customer_id}
-Name:{customer_name}''',
-         ln = 2, align = 'C')
+Electrical Details Report''', ln = 2, align = 'C')
+
+pdf.cell(200, 10, txt = f"ID: {customer_id}", ln=3)
+pdf.cell(200, 10, txt = f"Name: {customer_name}", ln = 4)
 pdf.set_font("Times", "B", size = 15)
-pdf.cell(200, 10, txt = "Output of Solar Panel", ln = 3, align = 'L')
+pdf.cell(200, 10, txt = "Output of Solar Panel", ln = 5, align = 'L')
 
 pdf.set_font("Arial", size = 13)
-pdf.cell(200, 10, txt = f"Size of Solar Panel: {sizeofpanelwatt} Watt, {sizeofpanelvolt} Volts", ln=4)
+pdf.cell(200, 10, txt = f"Size of Solar Panel: {sizeofpanelwatt} Watt, {sizeofpanelvolt} Volts", ln=6)
 
-pdf.cell(200, 10, txt = f"Type of connection for solar panel: {solarpanel_conn}", ln = 5)
+pdf.cell(200, 10, txt = f"Type of connection for solar panel: {solarpanel_conn}", ln = 7)
 
 if ok == True:
-    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: OK", ln=6)
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: OK", ln=8)
 else:
-    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: Select other type of connection", ln=6)
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel Connection Criteria: Select other type of connection", ln=8)
 
 if ok_eff == True:
-    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: OK", ln=7)
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: OK", ln=9)
 else:
-    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: Select other solar voltage instead of {sizeofpanelvolt} volts", ln=7)
+    pdf.cell(200, 10, txt = f"Selection of Solar Panel efficiency: Select other solar voltage instead of {sizeofpanelvolt} volts", ln=9)
 
-pdf.cell(200, 10, txt = f"Number of string for solar panel: {z}", ln=8)
+pdf.cell(200, 10, txt = f"Number of string for solar panel: {z}", ln=10)
 
 if y == 1:
-    pdf.cell(200, 10, txt = f"Total watt of each solar panel string: {sizeofpanelwatt} watt, {(sizeofpanelwatt)/(sizeofpanelvolt)} amp", ln=9)
+    pdf.cell(200, 10, txt = f"Total watt of each solar panel string: {sizeofpanelwatt} watt, {(sizeofpanelwatt)/(sizeofpanelvolt)} amp", ln=11)
 else:
-    pdf.cell(200, 10, txt="", ln=9)
+    pdf.cell(200, 10, txt="", ln=11)
 
 if((solar_sys_volt % sizeofpanelvolt) == 0):
-    pdf.cell(200, 10, txt = f"Total No. of Solar Panel in each string: {solarpanelineachstring}", ln=10)
+    pdf.cell(200, 10, txt = f"Total No. of Solar Panel in each string: {solarpanelineachstring}", ln=12)
 else:
-    pdf.cell(200, 10, txt = "", ln=10)
+    pdf.cell(200, 10, txt = "", ln=12)
     
-pdf.cell(200, 10, txt = f"Total Watts of Solar Panel: {t} watts, {round(t/sizeofpanelvolt, 2)} amps", ln=11)
+pdf.cell(200, 10, txt = f"Total Watts of Solar Panel: {t} watts, {round(t/sizeofpanelvolt, 2)} amps", ln=13)
 
-pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}", ln = 12)
+pdf.cell(200, 10, txt = f"Total No. of Solar Panel: {z*solarpanelineachstring}", ln = 14)
 
 pdf.set_font("Times", "B", size = 15)
-pdf.cell(200, 10, txt = "Battery Bank Output", ln = 13, align = 'L')
+pdf.cell(200, 10, txt = "Battery Bank Output", ln = 15, align = 'L')
 
 pdf.set_font("Arial", size = 13)
 
 if b == 0:
-    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} OK", ln = 14)
+    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} OK", ln = 16)
 elif b == 1:
-    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} Select other type of connection", ln = 14)
+    pdf.cell(200, 10, txt = f"Type of connection for Batteries: {battery_conn} Select other type of connection", ln = 16)
 
 if((bttry_bank_volt)%(bttry_rating_volts)==0):
-    pdf.cell(200, 10, txt = f"Selection of each battery voltage: OK", ln=15)
+    pdf.cell(200, 10, txt = f"Selection of each battery voltage: OK", ln=17)
 else:
-    pdf.cell(200, 10, txt = f"Selection of Each Battery Voltage: Select other type of voltage instead of {bttry_rating_volts} volts", ln=15)
+    pdf.cell(200, 10, txt = f"Selection of Each Battery Voltage: Select other type of voltage instead of {bttry_rating_volts} volts", ln=17)
 
-pdf.cell(200, 10, txt = f"Number of string for batteries: {string}", ln=16)
+pdf.cell(200, 10, txt = f"Number of string for batteries: {string}", ln=18)
 
 if b == 1:
-    pdf.cell(200, 10, txt = f"Total Amp.Hr of Each String {bttry_rating_amphr}", ln = 17)
+    pdf.cell(200, 10, txt = f"Total Amp.Hr of Each String {bttry_rating_amphr}", ln = 19)
 
 if((bttry_bank_volt)%(bttry_rating_volts)==0):
-    pdf.cell(200, 10, txt = f"Total No of Battery in Each String: {no_of_bttry}", ln=18)
+    pdf.cell(200, 10, txt = f"Total No of Battery in Each String: {no_of_bttry}", ln=20)
 
 if a == 1:
-    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr}", ln=19)
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr}", ln=21)
 elif a == 2:
-    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=19)
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=21)
 elif a == 3:
-    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=19)
+    pdf.cell(200, 10, txt = f"Total Battery Bank Amp. Hr: {bttry_rating_amphr * amphr}", ln=21)
 
-pdf.cell(200, 10, txt = f"Total Nos of battey in Battery Bank: {no_of_bttry * string}", ln=20)
-
-
-pdf.set_font("Times", "B", size = 15)
-pdf.cell(200, 10, txt = f"Battery Calculations", ln=21)
-
-pdf.set_font("Arial", size = 13)
-
-pdf.cell(200, 10, txt = f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day', ln = 22)
-pdf.cell(200, 10, txt = f'Total Amp.Hr : {total_amphr} Amp.Hr', ln = 23)
-pdf.cell(200, 10, txt = f'Average Load : {avg_load} Amp.Hr', ln = 24)
-pdf.cell(200, 10, txt = f'Storage Required : {storage_req} Amp.Hr', ln = 25)
-pdf.cell(200, 10, txt = f'Battery aging : {battery_aging} Amp.Hr', ln = 26)
-pdf.cell(200, 10, txt = f'Including Operating Temperature : {including_operating_temp} Amp.Hr', ln = 27)
-pdf.cell(200, 10, txt = f'Depth of discharge : {depth_of_discharge} Amp.Hr', ln = 28)
+pdf.cell(200, 10, txt = f"Total Nos of battey in Battery Bank: {no_of_bttry * string}", ln=22)
 
 
 pdf.set_font("Times", "B", size = 15)
-pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=29)
+pdf.cell(200, 10, txt = f"Battery Calculations", ln=23)
 
 pdf.set_font("Arial", size = 13)
-pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=30)
-pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =31)
+
+pdf.cell(200, 10, txt = f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day', ln = 24)
+pdf.cell(200, 10, txt = f'Total Amp.Hr : {total_amphr} Amp.Hr', ln = 25)
+pdf.cell(200, 10, txt = f'Average Load : {avg_load} Amp.Hr', ln = 26)
+pdf.cell(200, 10, txt = f'Storage Required : {storage_req} Amp.Hr', ln = 27)
+pdf.cell(200, 10, txt = f'Battery aging : {battery_aging} Amp.Hr', ln = 28)
+pdf.cell(200, 10, txt = f'Including Operating Temperature : {including_operating_temp} Amp.Hr', ln = 29)
+pdf.cell(200, 10, txt = f'Depth of discharge : {depth_of_discharge} Amp.Hr', ln = 30)
+
+
+pdf.set_font("Times", "B", size = 15)
+pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=31)
+
+pdf.set_font("Arial", size = 13)
+pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=32)
+pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =33)
 
 fig = plt.figure(figsize = (10, 7))
 plt.bar(df['Total Watt'], df['Watt Hr/Day'], width = 1.8, align='center')
