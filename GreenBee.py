@@ -554,7 +554,11 @@ pdf.cell(200, 10, txt = "GreenBee Innovation & Energy",
 
 pdf.set_font("Arial",size = 20)
 
-pdf.cell(200, 10, txt = f"Electrical Details Report for Customer \nID: {customer_id} and \nName:{customer_name}",
+pdf.cell(200, 10, txt = 
+f'''
+Electrical Details Report 
+CustomerID: {customer_id}
+Name:{customer_name}''',
          ln = 2, align = 'C')
 pdf.set_font("Times", "B", size = 15)
 pdf.cell(200, 10, txt = "Output of Solar Panel", ln = 3, align = 'L')
