@@ -644,7 +644,10 @@ pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_
 pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =31)
 
 fig = plt.figure(figsize = (10, 7))
-plt.bar(df['Total Watt'], df['Watt Hr/Day'])
+plt.bar(df['Total Watt'], df['Watt Hr/Day'], width = 1.8, align='center')
+plt.xlabel('Total Watt')
+plt.ylabel('Watt Hr/Day')
+plt.title('Total Watt vs Watt Hr/Day')
 plt.savefig("figure.png", format="png")
 pdf.image("figure.png", w=150, h=100, x=30)
 
