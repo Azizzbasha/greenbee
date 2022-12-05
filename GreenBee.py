@@ -123,6 +123,13 @@ st.dataframe(df)
 if st.button('Generate Graph'):
     # st.area_chart(df, x='Total Watt', y='Watt Hr/Day')
     st.bar_chart(df, x = 'Total Watt', y='Watt Hr/Day')
+    fig = plt.figure()
+    ax = fig.add_axes([0,0,1,1])
+    langs = df['Total Watt']
+    students = df['Watt Hr/Day']
+    ax.bar(langs,students)
+    plot = plt.savefig('plot.jpg')
+    st.image(plot)
 
     # st.set_option('deprecation.showPyplotGlobalUse', False)
     # totalwattgraph = [i for i in df['Total Watt']]
