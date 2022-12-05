@@ -41,7 +41,8 @@ def get_dataframe():
 
 df = get_dataframe()
 
-
+customer_id = st.text_input('CustomerId')
+customer_name = st.text_input('Customer Name')
 # Create row, column, and value inputs
 equip_placeholder = st.empty()
 no_placeholder = st.empty()
@@ -553,7 +554,7 @@ pdf.cell(200, 10, txt = "GreenBee Innovation & Energy",
 
 pdf.set_font("Arial",size = 20)
 
-pdf.cell(200, 10, txt = "Electrical Details Report",
+pdf.cell(200, 10, txt = f"Electrical Details Report for Customer with ID: {customer_id} and \n Name:{customer_name}",
          ln = 2, align = 'C')
 pdf.set_font("Times", "B", size = 15)
 pdf.cell(200, 10, txt = "Output of Solar Panel", ln = 3, align = 'L')
