@@ -643,11 +643,8 @@ pdf.set_font("Arial", size = 13)
 pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=30)
 pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =31)
 
-
-plt.figure(figsize=[2, 2])
-x = np.arange(0, 10, 0.00001)
-y = x*np.sin(2* np.pi * x)
-plt.plot(y)
+fig = plt.figure(figsize = (10, 7))
+plt.bar(df['Total Watt'], df['Watt Hr/Day'])
 plt.savefig("figure.png", format="png")
 pdf.image("figure.png")
 
