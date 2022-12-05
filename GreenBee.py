@@ -5,6 +5,8 @@ import numpy as np
 from fpdf import FPDF
 import fpdf
 import base64
+# import plotly.express as px
+from io import StringIO, BytesIO
 # import firebase_admin
 # from firebase_admin import credentials
 # from firebase_admin import db
@@ -133,6 +135,26 @@ if st.button('Generate Graph'):
     #                  alpha=0.5, label='Watt Hr/Day')
     # st.pyplot(plt.show())
 
+data = {'C':20, 'C++':15, 'Java':30,
+        'Python':35}
+courses = list(data.keys())
+values = list(data.values())
+  
+fig = plt.figure(figsize = (10, 5))
+ 
+# creating the bar plot
+plt.bar(courses, values, color ='maroon',
+        width = 0.4)
+ 
+plt.xlabel("Courses offered")
+plt.ylabel("No. of students enrolled")
+plt.title("Students enrolled in different courses")
+mybuff = StringIO()
+fig.write_html(mybuff, include_plotlyjs='cdn')
+mybuff = BytesIO(mybuff.getvalue().encode())
+b64 = base64.b64encode(mybuff.read()).decode()
+href = f'<a href="data:text/html;charset=utf-8;base64, {b64}" download="plot.html">Download plot</a>'
+st.markdown(href, unsafe_allow_html=True)
 # from firebase_admin import db
 # ref = db.reference("/Load Details/")
 
