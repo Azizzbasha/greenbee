@@ -325,7 +325,7 @@ st.subheader("Battery Bank Load Details")
 bttry_bank_volt = st.number_input(
     label='Battery Bank\'s Voltage: (Volts DC)', value=24)
 rsrv_day = st.number_input(
-    label='Reserve days (No. of days battery gives current)', value=2)
+    label='Reserve days (No. of days battery gives current)', value=2.0)
 loss = st.number_input(
     label='Loose connection / Wire loss factor (%)', value=20)
 bttry_eff = st.number_input(label='Battery Effeciency (%)', value=100)
