@@ -646,7 +646,7 @@ pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =31)
 fig = plt.figure(figsize = (10, 7))
 plt.bar(df['Total Watt'], df['Watt Hr/Day'])
 plt.savefig("figure.png", format="png")
-pdf.image("figure.png")
+pdf.image("figure.png", w=150, h=100, x=30)
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
