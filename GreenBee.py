@@ -648,8 +648,8 @@ plt.figure(figsize=[2, 2])
 x = np.arange(0, 10, 0.00001)
 y = x*np.sin(2* np.pi * x)
 plt.plot(y)
-plt.savefig("figure.svg", format="svg")
-pdf.image("figure.svg")
+plt.savefig("figure.png", format="pmg")
+pdf.image("figure.png")
 
 with st.sidebar:
     st.image(image='profile2.jpeg')
