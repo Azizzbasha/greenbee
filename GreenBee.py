@@ -121,7 +121,8 @@ st.subheader('Electrical Load Data')
 # And display the result!
 st.dataframe(df)
 if st.button('Generate Graph'):
-    st.area_chart(df, x='Total Watt', y='Watt Hr/Day')
+    # st.area_chart(df, x='Total Watt', y='Watt Hr/Day')
+    st.bar_chart(df)
 
     # st.set_option('deprecation.showPyplotGlobalUse', False)
     # totalwattgraph = [i for i in df['Total Watt']]
