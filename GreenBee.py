@@ -171,7 +171,7 @@ st.write(
     f"Total Solar Power after correction factor: {solar_power_correction}")
 
 solar_arr_size = solar_power_correction / avg_sunshine
-st.write(f"Solar array size after calculating Sun Hour: {solar_arr_size}")
+st.write(f"Solar array size after calculating Sun Hour: {round(solar_arr_size, 2)}")
 
 st.write('''
     ###### Size of Solar Panel
@@ -519,7 +519,7 @@ st.subheader('Battery Calculations')
 st.write(f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day')
 st.write(f'Total Amp.Hr : {total_amphr} Amp.Hr')
 st.write(f'Average Load : {avg_load} Amp.Hr')
-st.write(f'Storage Required : {storage_req} Amp.Hr')
+st.write(f'Storage Required : {round(storage_req,2)} Amp.Hr')
 st.write(f'Battery aging : {battery_aging} Amp.Hr')
 st.write(f'Including Operating Temperature : {including_operating_temp} Amp.Hr')
 st.write(f'Depth of discharge : {depth_of_discharge} Amp.Hr')
@@ -537,7 +537,7 @@ st.write(f'{((totalwattsum)+(totalwattsum*(additional_load/100))) / (invertor_ef
 
 st.subheader('Solar Controller: ')
 # st.write(f'{(t/sizeofpanelvolt)+7} AMP')
-st.write(f'{t/24} AMP')
+st.write(f'{t/sizeofpanelvolt} AMP')
 
 # PDF Generation
 pdf = FPDF()
@@ -635,7 +635,7 @@ pdf.set_font("Arial", size = 13)
 pdf.cell(200, 10, txt = f'Total KW.Hr/Day : {watthrsum} Watt.Hr/Day', ln = 24)
 pdf.cell(200, 10, txt = f'Total Amp.Hr : {total_amphr} Amp.Hr', ln = 25)
 pdf.cell(200, 10, txt = f'Average Load : {avg_load} Amp.Hr', ln = 26)
-pdf.cell(200, 10, txt = f'Storage Required : {storage_req} Amp.Hr', ln = 27)
+pdf.cell(200, 10, txt = f'Storage Required : {round(storage_req, 2)} Amp.Hr', ln = 27)
 pdf.cell(200, 10, txt = f'Battery aging : {battery_aging} Amp.Hr', ln = 28)
 pdf.cell(200, 10, txt = f'Including Operating Temperature : {including_operating_temp} Amp.Hr', ln = 29)
 pdf.cell(200, 10, txt = f'Depth of discharge : {depth_of_discharge} Amp.Hr', ln = 30)
@@ -645,7 +645,7 @@ pdf.set_font("Times", "B", size = 15)
 pdf.cell(200, 10, txt = f"Size of Invertor/Charge Calculator", ln=31)
 
 pdf.set_font("Arial", size = 13)
-pdf.cell(200, 10, txt= f"Size of invertor: {((watthrsum)+(watthrsum*(additional_load/100))) / (invertor_eff/100)}", ln=32)
+pdf.cell(200, 10, txt= f"Size of invertor: {((totalwattsum)+(totalwattsum*(additional_load/100))) / (invertor_eff/100)}", ln=32)
 pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =33)
 
 fig = plt.figure(figsize = (10, 7))
