@@ -652,6 +652,8 @@ fig = plt.figure(figsize = (10, 7))
 plt.bar(df['Total Watt'], df['Watt Hr/Day'], align='center')
 for i in range(len(df)):
     plt.axhline(y=df['Watt Hr/Day'][i], color='b', linestyle='-', xmax=0)
+for i, v in enumerate(df['Watt Hr/Day']):
+    fig.text(v + 3, i + .25, str(v), color = 'blue', fontweight='bold')
 plt.xlabel('Total Watt')
 plt.ylabel('Watt Hr/Day')
 plt.title('Total Watt vs Watt Hr/Day')
