@@ -452,9 +452,9 @@ st.subheader('Battery Bank Output')
 
 st.write (f'Type of connection for Batteries: {battery_conn}')
 
-if(b==0):
+if(b==1):
     st.write ('OK')
-elif(b==1):
+elif(b==0):
     st.write('Select other type of connection')
 else:
     st.write('')
