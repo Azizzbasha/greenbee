@@ -651,7 +651,7 @@ pdf.cell(200, 10, txt = f"Solar Controller: {t/24} AMP", ln =33)
 fig = plt.figure(figsize = (10, 7))
 plt.bar(df['Total Watt'], df['Watt Hr/Day'], align='center')
 for i in range(len(df)):
-    plt.hlines(df['Watt Hr/Day'][i], colors='blue', linestyles='solid', xmin=-5, xmax=df['Total Watt'][i])
+    plt.axhline(y=df['Watt Hr/Day'][i], color='b', linestyle='-')
 plt.xlabel('Total Watt')
 plt.ylabel('Watt Hr/Day')
 plt.title('Total Watt vs Watt Hr/Day')
