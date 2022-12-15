@@ -691,5 +691,4 @@ with st.sidebar:
 if login_button:
     for key in userpass:
             if (username == key and password == userpass[key]):
-                st.runtime.legacy_caching.clear_cache()
                 run_app()
