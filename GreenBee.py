@@ -678,9 +678,9 @@ userpass = {
 }
 
 username = st.empty()
-username.text_input("Username")
+username = username.text_input("Username")
 password = st.empty()
-password.text_input("Password")
+password = password.text_input("Password")
 for key in userpass:
     if (username == key and password == userpass[key]):
         st.write("OK")
