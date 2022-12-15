@@ -26,9 +26,9 @@ userpass = {
 }
 login_button = False
 username = st.empty()
-username = username.text_input("Username", value="", key = "8")
+username = username.text_input("Username", value="", key = 10)
 password = st.empty()
-password = password.text_input("Password", value = "", key = "9")
+password = password.text_input("Password", value = "", key = 11)
 if st.button('Login'):
     login_button = True
 if login_button:
