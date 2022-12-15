@@ -681,9 +681,8 @@ username = st.empty()
 username.text_input("Username")
 password = st.empty()
 password.text_input("Password")
-if st.button('Log In'):
-    for key in userpass:
-        if (username == key and password == userpass[key]):
-            run_app()
-            username.empty()
-            password.empty()
+for key in userpass:
+    if (username == key and password == userpass[key]):
+        run_app()
+        username.empty()
+        password.empty()
