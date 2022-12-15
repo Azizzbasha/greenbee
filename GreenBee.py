@@ -679,13 +679,12 @@ userpass = {
 login_button = False
 username = ""
 password = ""
-def login():
+
+with st.sidebar:
     username = st.empty()
     username = username.text_input("Username")
     password = st.empty()
     password = password.text_input("Password")
-with st.sidebar:
-    login()
     if st.button('Login'):
         login_button = True
 if login_button:
