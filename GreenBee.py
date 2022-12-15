@@ -676,6 +676,7 @@ userpass = {
     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
     "rajesh.singh@vcinfotech.ae": "Rajes@321"
 }
+login_button = False
 with st.sidebar:
     username = st.empty()
     username = username.text_input("Username")
