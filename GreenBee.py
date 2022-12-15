@@ -662,11 +662,11 @@ def run_app():
     plt.savefig("figure.png", format="png")
     pdf.image("figure.png", w=150, h=100, x=30)
 
-    sign_out = False
-    if st.button('Sign Out'):
-        sign_out = True
-        if sign_out:
-            st.runtime.legacy_caching.clear_cache()    
+    # sign_out = False
+    # if st.button('Sign Out'):
+    #     sign_out = True
+    #     if sign_out:
+    #         st.runtime.legacy_caching.clear_cache()    
     with st.sidebar:
         st.image(image='profile2.jpeg')
         export_as_pdf = st.button("Export Report")
