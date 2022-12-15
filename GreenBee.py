@@ -685,6 +685,7 @@ with st.sidebar:
     username = username.text_input("Username")
     password = st.empty()
     password = password.text_input("Password")
+    password.empty()
     if st.button('Login'):
         login_button = True
 if login_button:
