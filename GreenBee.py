@@ -19,27 +19,22 @@ import time
 #     pass
 # ref = db.reference("/")
 
-# userpass = {
-#     "aziz.basha@vcinfotech.ae": "Yamaha9394",
-#     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
-#     "rajesh.singh@vcinfotech.ae": "Rajes@321"
-# }
-# login_button = False
-# username = st.empty()
-# username = username.text_input("Username")
-# password = st.empty()
-# password = password.text_input("Password")
-# if st.button('Login'):
-#     login_button = True
-# if login_button:
-#     for key in userpass:
-#             if (username == key and password == userpass[key]):
-#                 pass
-import streamlit as st
-text = st.empty()
-text.text_input("input something", value="", key=8)
-time.sleep(5)
-text.text_input("input something", value="", key=9)
+userpass = {
+    "aziz.basha@vcinfotech.ae": "Yamaha9394",
+    "srinivas.harnoor@vcinfotech.ae": "Sri@123",
+    "rajesh.singh@vcinfotech.ae": "Rajes@321"
+}
+login_button = False
+username = st.empty()
+username = username.text_input("Username", value="", key = "8")
+password = st.empty()
+password = password.text_input("Password", value = "", key = "9")
+if st.button('Login'):
+    login_button = True
+if login_button:
+    for key in userpass:
+            if (username == key and password == userpass[key]):
+                st.write('OK')
 st.title('GreenBee Innovation')
 
 # Initialization
