@@ -676,12 +676,14 @@ userpass = {
     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
     "rajesh.singh@vcinfotech.ae": "Rajes@321"
 }
-
 with st.sidebar:
     username = st.empty()
     username = username.text_input("Username")
     password = st.empty()
     password = password.text_input("Password")
+    if st.button('Login'):
+        login_button = True
+if login_button:
     for key in userpass:
-        if (username == key and password == userpass[key]):
-            run_app()
+            if (username == key and password == userpass[key]):
+                run_app()
