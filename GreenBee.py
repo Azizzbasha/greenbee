@@ -662,6 +662,11 @@ def run_app():
     plt.savefig("figure.png", format="png")
     pdf.image("figure.png", w=150, h=100, x=30)
 
+    sign_out = False
+    if st.button('Sign Out'):
+        sign_out = True
+        if sign_out:
+            st.runtime.legacy_caching.clear_cache()    
     with st.sidebar:
         st.image(image='profile2.jpeg')
         export_as_pdf = st.button("Export Report")
@@ -671,8 +676,6 @@ def run_app():
         if export_as_pdf:
             html = create_download_link(pdf.output(dest="S").encode("latin-1"), "load_details")
             st.markdown(html, unsafe_allow_html=True)
-    if st.button('Sign Out'):
-        st.runtime.legacy_caching.clear_cache()
 userpass = {
     "aziz.basha@vcinfotech.ae": "Yamaha9394",
     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
