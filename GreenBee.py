@@ -671,8 +671,8 @@ def run_app():
         if export_as_pdf:
             html = create_download_link(pdf.output(dest="S").encode("latin-1"), "load_details")
             st.markdown(html, unsafe_allow_html=True)
-        if st.button('Log Out'):
-                    st.runtime.legacy_caching.clear_cache()
+    if st.button('Sign Out'):
+        st.runtime.legacy_caching.clear_cache()
 userpass = {
     "aziz.basha@vcinfotech.ae": "Yamaha9394",
     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
