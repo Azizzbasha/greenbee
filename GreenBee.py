@@ -683,7 +683,6 @@ password = st.empty()
 password = password.text_input("Password")
 for key in userpass:
     if (username == key and password == userpass[key]):
-        st.write("OK")
-        run_app()
         username.empty()
         password.empty()
+        run_app()
