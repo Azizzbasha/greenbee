@@ -23,9 +23,8 @@ from matplotlib.figure import Figure
 # except:
 #     pass
 # ref = db.reference("/")
-
-def run_app():
-
+@st.experimental_memo
+def main_app():
     st.title('GreenBee Innovation')
 
     # Initialization
@@ -671,6 +670,10 @@ def run_app():
         if export_as_pdf:
             html = create_download_link(pdf.output(dest="S").encode("latin-1"), "load_details")
             st.markdown(html, unsafe_allow_html=True)
+def run_app():
+    main_app()
+    if st.button('Clear'):
+        st.experimental_memo.clear()
 userpass = {
     "aziz.basha@vcinfotech.ae": "Yamaha9394",
     "srinivas.harnoor@vcinfotech.ae": "Sri@123",
