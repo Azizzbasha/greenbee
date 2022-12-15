@@ -37,9 +37,9 @@ import time
 #                 pass
 import streamlit as st
 text = st.empty()
-text.text_input("input something", value="", key="1")
+text.text_input("input something", value="", key="99")
 time.sleep(5)
-text.text_input("input something", value="", key="2")
+text.text_input("input something", value="", key="100")
 st.title('GreenBee Innovation')
 
 # Initialization
