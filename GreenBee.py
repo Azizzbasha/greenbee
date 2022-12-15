@@ -32,6 +32,8 @@ password = password.text_input("Password", value = "", key = 11)
 if st.button('Login'):
     login_button = True
 if login_button:
+    username = username.text_input(label='Username', value = "", key=12)
+    password = password.text_input(label='Password', value = "", key = 13)
     for key in userpass:
             if (username == key and password == userpass[key]):
                 st.write('OK')
