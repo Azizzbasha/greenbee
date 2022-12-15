@@ -25,15 +25,15 @@ userpass = {
     "rajesh.singh@vcinfotech.ae": "Rajes@321"
 }
 login_button = False
-username = st.empty()
-username = username.text_input("Username", value="", key = 10)
-password = st.empty()
-password = password.text_input("Password", value = "", key = 11)
+username_placeholder = st.empty()
+username = username_placeholder.text_input("Username", value="", key = 10)
+password_placeholder = st.empty()
+password = password_placeholder.text_input("Password", value = "", key = 11)
 if st.button('Login'):
     login_button = True
 if login_button:
-    username = username.text_input(label='Username', value = "", key=12)
-    password = password.text_input(label='Password', value = "", key = 13)
+    username = username_placeholder.text_input(label='Username', value = "", key=12)
+    password = password_placeholder.text_input(label='Password', value = "", key = 13)
     for key in userpass:
             if (username == key and password == userpass[key]):
                 st.write('OK')
