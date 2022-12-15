@@ -677,10 +677,14 @@ userpass = {
     "rajesh.singh@vcinfotech.ae": "Rajes@321"
 }
 
-st.title('Login Page')
-username = st.text_input("Enter your username: ")
-password = st.text_input("Enter password: ")
-for key in userpass:
-    if (username == key and password == userpass[key]):
-        st.title('OK')
-        run_app()
+with st.sidebar:
+    username = st.empty()
+    username.text_input("Username")
+    password = st.empty()
+    password.text_input("Password")
+    if st.button('Log In'):
+        for key in userpass:
+            if (username == key and password == userpass[key]):
+                run_app()
+                username.empty()
+                password.empty()
